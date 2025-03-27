@@ -1,0 +1,32 @@
+services:
+
+  postgres:
+    image: postgres:14
+    volumes:
+      - graphql_data:/var/lib/postgresql/data
+    ports:
+      - 2345:5432
+    networks:
+      - graphql-network
+    env_file:
+      - db.env
+
+
+  express:
+    build: ./express
+    ports:
+      - 4000:4000
+    networks:
+      - graphql-network
+    env_file:
+      - ./express/.env
+    depends_on:
+      - postgres
+
+
+networks:
+  graphql-network:
+    driver: 'bridge'
+
+volumes: 
+  graphql_data: {}

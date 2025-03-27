@@ -1,0 +1,56 @@
+@baseUrl = http://localhost:4000
+
+### GET USERS LIST ###
+POST {{baseUrl}}/user
+Content-Type: application/json
+Authorization: Bearer 123456
+
+{
+    "query": "query { usersList {name, age, uuid} }"
+}
+
+### GET USERS BY UUID ###
+POST {{baseUrl}}/user
+Content-Type: application/json
+Authorization: Bearer 123456
+
+{
+  "query": "query getUser($uuid: String!) { userByUUID(uuid: $uuid) {name, age, uuid, friends {name, age, uuid}} }",
+  "variables": {
+    "uuid": "aadc7a3d-328e-4680-b1c1-c85c78216c08"
+  }
+}
+
+### UPDATE USER ###
+
+POST {{baseUrl}}/user
+Content-Type: application/json
+Authorization: Bearer 123456
+
+{
+    "query": "mutation { updateUser(name: \"Emmanuel\", uuid: \"d95a118d-00e5-4dc4-9bbd-5b72a3df7be0\") { name, age, uuid } } "
+}
+
+### CREATE USER ###
+
+POST {{baseUrl}}/user
+Content-Type: application/json
+Authorization: Bearer 123456
+
+{
+    "query": "mutation { createUser(name: \"MEL\", age: 20) {name, age} }"
+}
+
+### GENEREATE FRIENDSHIP ###
+
+POST {{baseUrl}}/user
+Content-Type: application/json
+Authorization: Bearer 123456
+
+{
+    "query": "mutation setFriendship($uuid_a: String!, $uuid_b: String!) { friendship(uuid_a: $uuid_a, uuid_b: $uuid_b) }",
+    "variables": {
+      "uuid_a": "da86f522-270f-4c63-bff3-d2c238555964",
+      "uuid_b": "aadc7a3d-328e-4680-b1c1-c85c78216c08"
+    }
+}
