@@ -1,2 +1,2 @@
 # Express-GraphQL-API
-A GraphQL API showing its elementary concepts
+A GraphQL API showing this kind of API's concept
